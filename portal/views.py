@@ -1,8 +1,6 @@
-from django.http import HttpResponse
+from django.shortcuts import render
 
 
 def home(request):
-    return HttpResponse("<h1>Se você estiver vendo isso é porque deu certo, Parabéns</h1>")
+    return render(request, 'portal/pages/home.html')
 
-def sobre(request):
-    return HttpResponse("sobre")
