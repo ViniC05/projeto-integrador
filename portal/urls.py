@@ -1,8 +1,12 @@
 from django.urls import path
 
-from portal.views import home
+from . import views
+
+app_name = 'portal'
 
 urlpatterns = [
-    path('', home),
+    path('', views.home, name="home"),
+    path('contato/<int:id>/', views.contato, name="post")
+
     
 ]

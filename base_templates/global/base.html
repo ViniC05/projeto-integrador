@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+{% include 'portal/partials/head.html' %}
+<title> {% block title %}{% endblock title %} Portal do Cidadão</title>
+</head>
+<body>
+    {% include 'portal/partials/header.html' %}
+    {% include 'portal/partials/search.html' %}
+
+    <main class="main-content-container">
+        {% block content %}{% endblock content %}
+    </main>
+
+    {% include 'portal/partials/footer.html' %}
+</body>
+
+</html>

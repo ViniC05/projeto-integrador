@@ -1,12 +1,12 @@
-{% include 'portal/partials/head.html' %}
+{% extends 'global/base.html' %}
 
-<body>
-    {% include 'portal/partials/header.html' %}
-    {% include 'portal/partials/search.html' %}
+{% block title %}Home - {% endblock title %}
 
-
-
-
-</body>
-
-</html>
+{% block content %}
+<div class="main-content main-content-list container">
+    {% for post in posts %}
+    {%include 'portal/partials/post.html' %}
+    {% endfor %}
+    
+</div>
+{% endblock content %}
