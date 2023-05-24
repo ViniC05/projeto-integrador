@@ -1,10 +1,10 @@
 {% extends 'global/base.html' %}
 
-{% block title %}Alterar - {% endblock title %}
+{% block title %} {{ post.title }} - {% endblock title %}
 
 {% block content %}
 <div class="main-content main-content-detail container">
-    {%include 'portal/partials/post.html' %}
+{%include 'portal/partials/post.html' %}
     
 </div>
 {% endblock content %}

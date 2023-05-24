@@ -1,67 +1,69 @@
 <div class="post portal-list-item">
     <div class="portal cover">
         <a href="{% url 'portal:post' post.id %}">
-            <img src="{{ post.cover.url}}"
-                alt="Rua com buraco">
+            <img src="{{ post.cover.url }}" alt="Rua com buraco">
         </a>
     </div>
     <div class="portal-title-container">
         <h2 class="portal-title">
-            <a href="{% url 'portal:post' post.id %}">
-                 {{post.title}}
-            </a>
+            <a href="{% url 'portal:post' post.id %}">{{ post.title }}</a>
         </h2>
     </div>
     <div class="portal-author">
+
         <span class="portal-author-item">
             <i class="fas fa-user"></i>
-            {{post.author.first_name}} {{post.author.last_name}}
+            {% if post.author is not None %}
+                {% if post.author.first_name %}
+                    {{ post.author.first_name }} {{ post.author.last_name }}
+                {% else %}
+                    {{ post.author.username }}
+                {% endif %}
+            {% else %}
+                desconhecido
+            {% endif %}
         </span>
+
         <span class="portal-author-item">
             <i class="fas fa-calendar-alt"></i>
             {{ post.created_at|date:"d/m/Y" }} às {{ post.created_at|date:"H:i:s" }}
         </span>
-        <span class="portal-author-item">
-            <a href="">
-                <i class="fas fa-layer-group"></i>
-                <span>{{post.Category}}</span>
-            </a>
-        </span>
+        {% if post.Category is not None %}
+            <span class="portal-author-item">
+                <a href="{% url 'portal:category' post.Category.id %}">
+                    <i class="fas fa-layer-group"></i>
+                    <span>{{ post.Category }}</span>
+                </a>
+            </span>
+        {% endif %}
     </div>
     <div class="portal-content">
-        <p>{{post.description}}</p>
+        <p>{{ post.description }}</p>
     </div>
-
     <div class="portal-meta-container">
         <div class="portal-meta portal-time">
-            <h3 class="portal-meta-title"><i class="fas fa-stopwatch"></i>Dias</h3>
-            <div class="portal-meta-text">
-                {{post.days}}
-            </div>
+            <h3 class="portal-meta-title">
+                <i class="fas fa-stopwatch"></i>Dias
+            </h3>
+            <div class="portal-meta-text">{{ post.days }}</div>
         </div>
         <div class="portal-meta portal-status">
-            <h3 class="portal-meta-title"><i class="fas fa-pizza-slice"></i>Status</h3>
-            <div class="portal-meta-text">
-                {{post.status}}
-            </div>
+            <h3 class="portal-meta-title">
+                <i class="fas fa-pizza-slice"></i>Status
+            </h3>
+            <div class="portal-meta-text">{{ post.status }}</div>
         </div>
     </div>
-
     {% if is_detail_page is not True %}
-    
-    <footer class="portal-footer">
-        <a href=" {% url 'portal:post' post.id %} " class="portal-read-more button button-dark button-full-width">
-            <i class="fas fa-eye"></i>
-            <span>ver mais...</span>
-        </a>
-    </footer>
-
+        <footer class="portal-footer">
+            <a href="{% url 'portal:post' post.id %}"
+               class="portal-read-more button button-dark button-full-width">
+                <i class="fas fa-eye"></i>
+                <span>ver mais...</span>
+            </a>
+        </footer>
     {% endif %}
-
     {% if is_detail_page is True %}
-    <div class="preparation-steps">
-        {{post.preparation_steps|linebreaksbr}}
-    </div>
+        <div class="preparation-steps">{{ post.preparation_steps|linebreaksbr }}</div>
     {% endif %}
 </div>
-

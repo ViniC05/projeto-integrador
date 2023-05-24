@@ -1,0 +1,12 @@
+{% extends "global/base.html" %}
+
+{% block title %} {{ title }} - {% endblock title %}
+
+{% block content %}
+<div class="main-content main-content-list container">
+    {% for post in posts %}
+    {% include "portal/partials/post.html" %}
+    {% endfor %}
+    
+</div>
+{% endblock content %}

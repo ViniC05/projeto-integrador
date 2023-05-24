@@ -6,7 +6,6 @@ app_name = 'portal'
 
 urlpatterns = [
     path('', views.home, name="home"),
-    path('contato/<int:id>/', views.contato, name="post")
-
-    
+    path('portal/category/<int:category_id>/', views.category, name="category"),
+    path('contato/<int:id>/', views.post_portal, name="post"),    
 ]
