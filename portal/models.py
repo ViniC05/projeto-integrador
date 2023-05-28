@@ -12,7 +12,7 @@ class Category(models.Model):
 class portal(models.Model):
     title = models.CharField(max_length=65)
     mini_description = models.CharField(max_length=165)
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
     days = models.IntegerField()
     status = models.CharField(max_length=20)
     description = models.TextField()
