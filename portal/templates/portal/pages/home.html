@@ -3,6 +3,9 @@
     Home -
 {% endblock title %}
 {% block content %}
+
+{% include 'portal/partials/message.html' %}
+
     <div class="main-content main-content-list container">
         {% for post in posts %}
             {% include "portal/partials/post.html" %}

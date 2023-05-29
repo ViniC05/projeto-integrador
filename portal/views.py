@@ -9,6 +9,8 @@ def home(request):
     posts = portal.objects.filter(
         is_published=True
     ).order_by('-id')
+
+
     return render(request, 'portal/pages/home.html', context={
         'posts': posts,
     })
