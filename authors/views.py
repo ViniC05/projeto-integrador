@@ -110,11 +110,65 @@ def dashboard_portal_edit(request, id):
         raise Http404()
     
     form = AuthorPortalForm(
-        request.POST or None,
+        data=request.POST or None,
+        files=request.FILES or None,
         instance=post
     )
+
+    if form.is_valid():
+        # agora, o form é válido e eu posso salvar
+        post = form.save(commit=False)
+
+        post.author = request.user
+        post.is_published = False
+
+        post.save()
+        messages.success(request, 'Sua publicação foi salva com sucesso!')
+        return redirect(reverse('authors:dashboard_portal_edit', args=(id,)))
 
     return render(request, 'authors/pages/dashboard_portal.html',
                   context={
                       'form': form
                   })
+
+
+
+@login_required(login_url='authors:login', redirect_field_name='next')
+def dashboard_portal_novo(request):
+    form = AuthorPortalForm(
+        data=request.POST or None,
+        files=request.FILES or None
+
+    )
+
+    if form.is_valid():
+        # agora, o form é válido e eu posso salvar
+        post = form.save(commit=False)
+
+        post.author = request.user
+        post.is_published = False
+
+        post.save()
+        messages.success(request, 'Sua publicação foi salva com sucesso!')
+        return redirect(reverse('authors:dashboard_portal_novo'))
+
+    return render(request, 'authors/pages/dashboard_portal.html',
+                  context={
+                      'form': form
+                  })
+
+
+@login_required(login_url='authors:login', redirect_field_name='next')
+def dashboard_portal_delete(request, id):
+    post= portal.objects.filter(
+        is_published=False,
+        author=request.user,
+        pk=id,
+    ).first()
+
+    if not post:
+        raise Http404()
+    
+    post.delete()
+    messages.success(request, 'Deletado com sucesso!')
+    return redirect(reverse('authors:dashboard'))

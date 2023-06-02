@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.text import slugify
 
 
 class Category(models.Model):
@@ -13,8 +14,10 @@ class portal(models.Model):
     title = models.CharField(max_length=65)
     mini_description = models.CharField(max_length=165)
     slug = models.SlugField(unique=True)
-    days = models.IntegerField()
+    days = models.IntegerField(default=0)
     status = models.CharField(max_length=20)
+    rua = models.CharField(max_length=70, null=True)
+    bairro = models.CharField(max_length=70, null=True)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -29,3 +32,10 @@ class portal(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            slug = f'{slugify(self.title)}'
+            self.slug = slug
+
+        return super().save(*args, **kwargs)

@@ -5,7 +5,7 @@
     <div class="main-content center container">
         <h2>Dashboard ({{ user }}) </h2>
         {% include 'authors/pages/partials/login_message.html' %}
-
+        {% include 'global/partials/message.html' %}
         <div class="authors-dashboard-container">
             <h3>Publicações aguardando aprovação</h3>
             
@@ -14,6 +14,10 @@
                 {% for post in posts %}
                 <li>
                     <a href="{% url 'authors:dashboard_portal_edit' post.id %}"> {{ post.title }} </a>
+                    <form class="inline-form form-delete" action="{% url 'authors:dashboard_portal_delete' post.id %}" method='POST'>
+                        {% csrf_token %}
+                        <button class="plaintext-button" type="submit">❌</button>
+                    </form>
                 </li>
                 {% empty %}
                 <li>
@@ -41,6 +45,6 @@
         </div>
     </div>
 
-    {% include 'global/partials/message.html' %}
+
 
 {% endblock content %}
