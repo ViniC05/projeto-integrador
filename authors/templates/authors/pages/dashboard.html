@@ -1,0 +1,46 @@
+{% extends "global/base.html" %}
+{% block title %}Dashboard {{ user }} -  
+{% endblock title %}
+{% block content %}
+    <div class="main-content center container">
+        <h2>Dashboard ({{ user }}) </h2>
+        {% include 'authors/pages/partials/login_message.html' %}
+
+        <div class="authors-dashboard-container">
+            <h3>Publicações aguardando aprovação</h3>
+            
+
+            <ul>
+                {% for post in posts %}
+                <li>
+                    <a href="{% url 'authors:dashboard_portal_edit' post.id %}"> {{ post.title }} </a>
+                </li>
+                {% empty %}
+                <li>
+                    <p>Você não tem nenhuma publicação</p>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="authors-dashboard-container">
+            <h3>Suas publicações publicadas</h3>
+            
+
+            <ul>
+                {% for p in posts_published %}
+                <li>
+                    <p>{{ p.title }}</p>
+                </li>
+                {% empty %}
+                <li>
+                    <p>Você não tem nenhuma publicação publicada</p>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    {% include 'global/partials/message.html' %}
+
+{% endblock content %}

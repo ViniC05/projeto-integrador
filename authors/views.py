@@ -5,6 +5,9 @@ from django.http import Http404
 from django.shortcuts import redirect, render
 from django.urls import reverse
 
+from authors.forms.portal_form import AuthorPortalForm
+from portal.models import portal
+
 from .forms import LoginForm, RegisterForm
 
 
@@ -49,7 +52,6 @@ def login_create(request):
     if not request.POST:
         raise Http404()
     form = LoginForm(request.POST)
-    login_url = reverse('authors:login')
 
     if form.is_valid():
         authenticated_user = authenticate(
@@ -64,7 +66,7 @@ def login_create(request):
             messages.error(request, 'Usuário inválido!')
     else:
         messages.error(request, 'Credenciais inválidas!')
-    return redirect(login_url)
+    return redirect(reverse('authors:dashboard'))
 
 
 @login_required(login_url='authors:login', redirect_field_name='next')
@@ -77,3 +79,42 @@ def logout_view(request):
     
     logout(request)
     return redirect(reverse('authors:login'))
+
+@login_required(login_url='authors:login', redirect_field_name='next')
+def dashboard(request):
+    posts = portal.objects.filter(
+        is_published=False,
+        author=request.user
+    )
+
+    posts_published = portal.objects.filter(
+        is_published=True,
+        author=request.user
+    )
+    return render(request, 'authors/pages/dashboard.html',
+                  context={
+                      'posts': posts,
+                      'posts_published': posts_published,
+                  })
+
+
+@login_required(login_url='authors:login', redirect_field_name='next')
+def dashboard_portal_edit(request, id):
+    post= portal.objects.filter(
+        is_published=False,
+        author=request.user,
+        pk=id,
+    ).first()
+
+    if not post:
+        raise Http404()
+    
+    form = AuthorPortalForm(
+        request.POST or None,
+        instance=post
+    )
+
+    return render(request, 'authors/pages/dashboard_portal.html',
+                  context={
+                      'form': form
+                  })

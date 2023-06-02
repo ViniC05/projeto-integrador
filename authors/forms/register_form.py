@@ -18,7 +18,7 @@ class RegisterForm(forms.ModelForm):
         add_placeholder(self.fields['password2'], 'Digite a senha novamente')
 
     username = forms.CharField(
-        label='Username',
+        label='Usuario',
         help_text=(
             'O usuário deve ter letras, numeros ou um desses caracteres @.+-_'
             'O tamanho deve estar entre 4 e 20 caracteres.'
@@ -32,11 +32,11 @@ class RegisterForm(forms.ModelForm):
     )
     first_name = forms.CharField(
         error_messages={'required': 'Escreva seu primeiro nome'},
-        label='First name'
+        label='Nome'
     )
     last_name = forms.CharField(
         error_messages={'required': 'Escreva seu sobrenome'},
-        label='Last name'
+        label='Sobrenome'
     )
     email = forms.EmailField(
         error_messages={'required': 'E-mail é obrigatório'},
@@ -54,11 +54,11 @@ class RegisterForm(forms.ModelForm):
             'pelo menos 8 caracteres.'
         ),
         validators=[strong_password],
-        label='Password'
+        label='Senha'
     )
     password2 = forms.CharField(
         widget=forms.PasswordInput(),
-        label='Password2',
+        label='Senha',
         error_messages={
             'required': 'Por favor, repita sua senha'
         },
