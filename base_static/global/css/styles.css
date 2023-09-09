@@ -90,6 +90,11 @@ a {
     background: var(--color-primary-dark);
 }
 
+.main-header {
+    display: flex;
+    justify-content: space-between;
+}
+
 .main-logo {
     font-size: 4rem;
     color: var(--color-white);
@@ -434,3 +439,4 @@ color: var(--color-debug-dark);
         grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
     }
 }
+

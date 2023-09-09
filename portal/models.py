@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.text import slugify
@@ -15,7 +16,7 @@ class portal(models.Model):
     mini_description = models.CharField(max_length=165)
     slug = models.SlugField(unique=True)
     days = models.IntegerField(default=0)
-    status = models.CharField(max_length=20)
+    status = models.CharField(max_length=20, default='Não resolvido')
     rua = models.CharField(max_length=70, null=True)
     bairro = models.CharField(max_length=70, null=True)
     description = models.TextField()
@@ -39,3 +40,13 @@ class portal(models.Model):
             self.slug = slug
 
         return super().save(*args, **kwargs)
+    
+
+class Comment(models.Model):
+    post = models.ForeignKey(portal, on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Comentado por {self.author} no {self.post} às {self.created_at}'

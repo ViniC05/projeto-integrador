@@ -34,7 +34,7 @@
             <ul>
                 {% for p in posts_published %}
                 <li>
-                    <p>{{ p.title }}</p>
+                    <p>{{ p.title }} - {{ p.status }}</p>
                 </li>
                 {% empty %}
                 <li>
