@@ -243,6 +243,24 @@ a {
     font-size: 1.6rem;
 }
 
+.endereco{
+    margin-left: 30px;
+}
+
+.endereco p{
+    margin-left: 10px;
+    font-family: var(--font-headings);
+}
+
+.resposta{
+    margin: 30px;
+    font-family: var(--font-primary);
+}
+
+.resposta p{
+    margin-left: 10px;
+}
+
 .portal-footer a {
     background: var(--color-primary-dark);
     display: block;
@@ -432,6 +450,74 @@ color: var(--color-debug-dark);
     list-style-type: None;
     margin: 1rem 0;
 }
+
+.adicionar_comentarios{
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+}
+
+.adicionar_comentarios button{
+    display: block;
+}
+
+.area_comentarios{
+    margin: 30px
+}
+
+.area_comentarios li{
+    list-style-type: none;
+    background-color: var(--color-gray-0);
+    border-radius: 5px;
+    
+    
+}
+
+.comentario{
+    margin-bottom: 15px;
+    margin-top: 15px;
+    font-family: "roboto";
+    margin-left: 10px;
+}
+
+.area_comentarios hr{
+    border-top: 1px solid var(--color-gray-1);
+}
+
+.adicionar_comentarios{
+    text-align: center;
+}
+
+.adicionar_comentarios button{
+    font-family: "roboto";
+    margin: 0 auto;
+    border: none;
+    padding: 10px;
+    text-decoration: none;
+    cursor:pointer;
+    transition: background .3s;
+    border-radius: 5px;
+    width: 50%;
+}
+
+.adicionar_comentarios button:hover{
+    font-weight: 1000;
+    background-color: var(--color-gray-2);
+}
+
+.nome-usuario{
+    font-size: 15px;
+    margin-right: 5px;
+    font-weight: 500;
+}
+
+.data-comentario{
+    font-size: 13px;
+    color: var(--color-gray-4);
+}
+
+
 
 @media (max-width: 600px){
     .main-content-list,

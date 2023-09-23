@@ -1,0 +1,11 @@
+<div class="comentario">
+    <div class="cabecalho">
+        <span class="nome-usuario">{{ comment.author }}</span> <!-- nome-usuario -->
+        <span class="data-comentario">{{ comment.created_at|date:"d/m/Y" }}</span> <!-- data-comentario -->
+    </div><!-- cabecalho -->
+
+    <div class="comment-content">
+        <span class="conteudo-comentario">{{ comment.content }}</span><!-- conteudo comentario -->
+    </div><!-- comment-content -->
+</div> <!-- comentário -->
+<hr>

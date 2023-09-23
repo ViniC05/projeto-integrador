@@ -20,7 +20,16 @@
         <h5>
 
             <a class="main-logo" href="{% url 'portal:login' %}">
+                {% if user.is_authenticated %}
+                <span class="main-logo-text">{{user}}</span>
+                {% else %}
                 <span class="main-logo-text">Login</span>
+                {% endif %}
+                
+                
+                
+                
+
             </a>
             
         </h5>

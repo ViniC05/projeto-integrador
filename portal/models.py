@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils import timezone
 from django.utils.text import slugify
 
 
@@ -23,6 +24,7 @@ class portal(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=False)
+    feedback = models.TextField(default='Sem resposta ainda.')
     cover = models.ImageField(
         upload_to='portal/covers/%Y/%m/%d/', blank=True, default='')
     Category = models.ForeignKey(
@@ -30,6 +32,9 @@ class portal(models.Model):
         default=None)
     author = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True)
+    
+    def diferenca_dias(self):
+        return (timezone.now() - self.created_at).days
 
     def __str__(self):
         return self.title

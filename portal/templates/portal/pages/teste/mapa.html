@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html class="use-all-space">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta charset="UTF-8" />
+    <title>My Map</title>
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <!-- Replace version in the URL with desired library version -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.15.0/maps/maps.css"
+    />
+
+    <style>
+      #map {
+        width: calc(100%-30px);
+        height: 300px;
+        border-radius: 20px;
+        overflow: hidden;
+        margin: 15px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <!-- Replace version in the URL with desired library version -->
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.15.0/maps/maps-web.min.js"></script>
+    <script>
+      const apiKey = 'ghvRKmU94zBofOZffmm8psbK9xuLdRlj';
+
+      // Localização que você deseja geocodificar
+      const endereco = '{{post.rua}}, {{post.bairro}}, Guaíra-sp';
+
+      fetch(`https://api.tomtom.com/search/2/geocode/${endereco}.json?key=${apiKey}`)
+        .then(response => response.json())
+        .then(data => {
+          // A resposta deve conter as coordenadas da localização
+          const latitude = data.results[0].position.lat;
+          const longitude = data.results[0].position.lon;
+
+          console.log(latitude);
+          console.log(longitude);
+
+          // Inicialize o mapa com as coordenadas obtidas
+          const map = tt.map({
+            key: apiKey,
+            container: 'map', // ID do elemento HTML onde o mapa será exibido
+            center: [longitude, latitude], // Coordenadas para o centro do mapa
+            zoom: 15, // Nível de zoom inicial
+          });
+
+          // Crie um marcador e adicione-o ao mapa
+          const marker = new tt.Marker().setLngLat([longitude, latitude]).addTo(map);
+        })
+        .catch(error => {
+          console.error('Erro ao geocodificar o endereço:', error);
+        });
+    </script>
+  </body>
+</html>

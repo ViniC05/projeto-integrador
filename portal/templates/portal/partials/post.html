@@ -43,7 +43,7 @@
             <h3 class="portal-meta-title">
                 <i class="fas fa-stopwatch"></i>Dias
             </h3>
-            <div class="portal-meta-text">{{ post.days }}</div>
+            <div class="portal-meta-text">{{ post.diferenca_dias }}</div>
         </div>
         <div class="portal-meta portal-status">
             <h3 class="portal-meta-title">
@@ -67,21 +67,33 @@
             <p>Endereço: {{ post.rua }}</p>
             <p>Bairro: {{ post.bairro }}</p>
         </div>
-        <div class="preparation-steps">{{ post.preparation_steps|linebreaksbr }}</div>
+
+        <div class="mapa">
+            {% include "portal/pages/teste/mapa.html" %}
+        </div>
         {% block content %}
-            <h3>Comments</h3>
-            <ul>
+
+        <div class="resposta">
+            <h1>Resposta:</h1>
+            <p>{{post.feedback|linebreaksbr}}</p>
+        </div>
+
+        <div class="area_comentarios">
+            <h3>Comentários</h3>
+           <ul>
                 {% for comment in post.comment_set.all %}
-                    <li>{{ comment.content }} - {{ comment.author }} at {{ comment.created_at }}</li>
+                   <li> {% include 'portal/partials/comentarios.html' %} </li>
                 {% endfor %}
             </ul>
+        </div>
+
             {% if user.is_authenticated %}
                 <div class="adicionar_comentarios">
                     <h3>Adicionar um comentário</h3>
                     <form method="post"
                           action="{% url 'portal:add_comment_to_post' post_id=post.id %}">
                         {% csrf_token %}
-                        <textarea name="content" rows="4" cols="50"></textarea>
+                        <textarea name="content" rows="4" cols="85"></textarea>
                         <button type="submit">Adicionar Comentário</button>
                     </form>
                 </div>

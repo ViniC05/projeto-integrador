@@ -11,6 +11,9 @@ from .forms import CommentForm
 from .models import Comment, portal
 
 
+def teste(request):
+    return render(request, 'portal/pages/teste/mapa.html')
+
 def home(request):
     posts = portal.objects.filter(
         is_published=True
@@ -102,7 +105,8 @@ def login_view(request):
 def add_comment_to_post(request, post_id):
     if request.method == 'POST':
         content = request.POST['content']
-        author = request.user # Obtem o usuário autenticado
+        # Obtem o usuário autenticado
+        author = request.user 
         
         
         # Salvar o comentário no banco de dados

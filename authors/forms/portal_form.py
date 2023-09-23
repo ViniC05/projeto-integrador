@@ -17,5 +17,21 @@ class AuthorPortalForm(forms.ModelForm):
             'cover': forms.FileInput(
                 attrs={'class': 'span-2'
                        }
-            )
+            ),
+            'title' : forms.TextInput(attrs={'placeholder':'Digite o titulo aqui' }),
+            'mini_description' : forms.TextInput(attrs={'placeholder' : 'Digite a mini descrição aqui'}),
+            'rua' : forms.TextInput(attrs={'placeholder' : 'Ex: Rua vinte'}),
+            'bairro' : forms.TextInput(attrs={'placeholder' : 'Ex: Centro'}),
+            'description' : forms.Textarea(attrs={'placeholder' : 'Digite a descrição aqui'}),
+            
+        }
+        labels = {
+            'title': 'Titulo',
+            'mini_description' : 'Mini descrição',
+            'description' : 'Descrição',
+            'cover' : 'Imagem',
+        }
+
+        place_holders = {
+            'title' : 'Digite o titulo'
         }

@@ -5,6 +5,7 @@ from . import views
 app_name = 'portal'
 
 urlpatterns = [
+    path('mapa', views.teste, name='teste'),
     path('', views.home, name="home"),
     path('portal/search/', views.search, name="search"),
     path('portal/category/<int:category_id>/', views.category, name="category"),
