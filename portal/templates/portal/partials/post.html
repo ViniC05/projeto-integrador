@@ -93,9 +93,25 @@
                     <form method="post"
                           action="{% url 'portal:add_comment_to_post' post_id=post.id %}">
                         {% csrf_token %}
-                        <textarea name="content" rows="4" cols="85"></textarea>
-                        <button type="submit">Adicionar Comentário</button>
+                        <textarea id="content" name="content" rows="4" cols="85"></textarea>
+                        <span id="contCaracteres">0 Caracteres</span>
+                        <button id="btnSubmit" type="submit" disabled>Adicionar Comentário</button>
                     </form>
+
+                    <script>
+                        var txtArea = document.getElementById("content");
+                        var contCaracteres = document.getElementById("contCaracteres");
+                        var btnSubmit = document.getElementById("btnSubmit");
+                         
+                        txtArea.addEventListener("input", () => {
+                            var numCaract = txtArea.value.length;
+                            contCaracteres.innerHTML = numCaract + " Caracteres";
+
+                            numCaract > 10 ? btnSubmit.disabled = false : btnSubmit.disabled = true;
+                        })
+                      
+                    </script>
+
                 </div>
             {% else %}
                 <h3>Faça login para escrever um comentário!</h3>

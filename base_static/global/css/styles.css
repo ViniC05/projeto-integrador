@@ -489,6 +489,14 @@ color: var(--color-debug-dark);
     text-align: center;
 }
 
+#contCaracteres{
+    display:flex;
+    color:rgb(87, 87, 87);
+    font-size: 12px;
+    margin:0 4px;
+    font-family: inherit;
+}
+
 .adicionar_comentarios button{
     font-family: "roboto";
     margin: 0 auto;
